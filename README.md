@@ -18,8 +18,17 @@ On the read path (clients querying for a given identity), a server should requir
 
 Assuming < 1K document size limits, 1GB of storage/memory would allow serving 1M Dedns identities, and this PoW construction would ensure that the most important and popular identities are always preserved.
 
+
+*TODO*: write path probably should use the `timestamp` window as well, to phase out malicious spam identities over time.
+
+Public servers are free to employ some additional forms of deciding which identities to hosts, and the protocol could include some standard way to provide user-feedback. E.g. captchas, LN payments, email checks etc. could help new users temporary bootstrap their identities, so that their users could help accumulate PoW for them. However only PoW is universally transferable between instances helping availability.
+
 ## Sharding through application-specific identity-masks
 
 Dedns relies on an abundance of public servers, storing redundant information to increase availability. Each server trying to store the same copy of all the data is not the best scheme.
 
 When Dedns is employed in applications, each application might require that the Dedns identity used in it match a certain pattern - e.g. starts with a fixed prefix. E.g. application XYZ generates and allows only Dedns identities starting with `0101` bytes. The XYZ application will just grind a little bit when generating the Dedns identity. This way it's possible to run Dedns server only hosting identities for a set of applications, effectively logically partitioning the identity space.
+
+## Feedback
+
+Please see [discussions page](https://github.com/dpc/dedns/discussions) and feel free to leave your feedback.
